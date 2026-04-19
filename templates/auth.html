@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6 col-lg-4">
+        <div class="card shadow-lg border-0 rounded-lg mt-5">
+            <div class="card-header bg-primary text-white text-center py-4">
+                <h3 class="font-weight-light my-2">{% if is_login %}Login{% else %}Create Account{% endif %}</h3>
+            </div>
+            <div class="card-body p-5">
+                <form method="POST" action="{% if is_login %}{{ url_for('auth_login') }}{% else %}{{ url_for('auth_register') }}{% endif %}">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="inputUsername" type="text" name="username" placeholder="Username" required />
+                        <label for="inputUsername">Username</label>
+                    </div>
+                    <div class="form-floating mb-4">
+                        <input class="form-control" id="inputPassword" type="password" name="password" placeholder="Password" required />
+                        <label for="inputPassword">Password</label>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary btn-lg" type="submit">
+                            {% if is_login %}Login{% else %}Register{% endif %}
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center py-3">
+                <div class="small">
+                    {% if is_login %}
+                    <a href="{{ url_for('auth_register') }}">Need an account? Sign up!</a>
+                    {% else %}
+                    <a href="{{ url_for('auth_login') }}">Have an account? Go to login</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

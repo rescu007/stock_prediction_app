@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="mt-2 mb-4 gradient-text">Market Dashboard</h1>
+
+<div class="row">
+    <!-- Watchlist Widget -->
+    <div class="col-lg-4 mb-4">
+        <div class="card shadow h-100">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fa-solid fa-star me-2"></i> Your Watchlist</h5>
+            </div>
+            <div class="card-body">
+                {% if current_user.is_authenticated %}
+                <ul class="list-group" id="watchlistContainer">
+                    <li class="list-group-item text-center">Loading...</li>
+                </ul>
+                {% else %}
+                <p class="text-muted text-center mt-3">Please <a href="{{ url_for('auth_login') }}">login</a> to view your watchlist.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <!-- Indian Market Quick View -->
+    <div class="col-lg-8 mb-4">
+        <div class="card shadow h-100">
+            <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="fa-solid fa-arrow-trend-up me-2"></i> Indian Movers (NIFTY/SENSEX)</h5>
+                <a href="{{ url_for('indian_stocks') }}" class="btn btn-sm btn-light">View All</a>
+            </div>
+            <div class="card-body">
+                <div class="row" id="moversContainer">
+                    <div class="col-12 text-center text-muted">Fetching live market data... <div class="spinner-border spinner-border-sm ms-2" role="status"></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow">
+            <div class="card-header bg-dark text-white border-secondary">
+                <h5 class="mb-0"><i class="fa-solid fa-search me-2"></i> Deep Learning Analysis Search</h5>
+            </div>
+            <div class="card-body py-5 text-center">
+                <h3>Enter any ticker to begin DNN Prediction</h3>
+                <p class="text-muted">Analyze global or Indian markets (append .NS for NSE, .BO for BSE)</p>
+                
+                <form class="d-flex justify-content-center mt-4" action="{{ url_for('predict_detail') }}" method="GET">
+                    <input type="text" name="ticker" class="form-control form-control-lg w-50" placeholder="e.g. INFY.NS, AAPL, RELIANCE.NS" required>
+                    <button type="submit" class="btn btn-primary btn-lg ms-2 px-5">Analyze</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

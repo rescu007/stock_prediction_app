@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4 mt-2">
+    <h1 class="gradient-text">Indian Stocks Monitor</h1>
+    <span class="badge bg-primary fs-6">NIFTY 50 / SENSEX Trackers</span>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header bg-dark text-white border-secondary d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Major Movers</h5>
+        <input type="text" id="tableSearch" class="form-control form-control-sm w-25" placeholder="Search Ticker...">
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle" id="indianStocksTable">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Name Prefix</th>
+                        <th>Current Price (₹)</th>
+                        <th>Change %</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="indianStocksBody">
+                    <tr>
+                        <td colspan="5" class="text-center py-4">
+                            <div class="spinner-border text-primary" role="status"></div>
+                            <p class="mt-2 text-muted">Fetching live feed from NSE/BSE...</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

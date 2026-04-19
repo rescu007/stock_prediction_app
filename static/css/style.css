@@ -1,0 +1,218 @@
+/* =============================================
+   Premium Aesthetic Dashboard Styling
+   ============================================= */
+
+/* Light mode (default base) */
+:root, [data-bs-theme="light"] {
+    --brand-bg: #f8fafc;
+    --brand-sidebar: #ffffff;
+    --brand-card: #ffffff;
+    --brand-gradient: linear-gradient(135deg, #2563eb 0%, #10b981 100%);
+    --text-primary: #1e293b;
+    --text-muted: #64748b;
+    --border-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Dark mode overrides */
+[data-bs-theme="dark"] {
+    --brand-bg: #0b0f19;
+    --brand-sidebar: rgba(15, 23, 42, 0.6);
+    --brand-card: rgba(30, 41, 59, 0.4);
+    --brand-gradient: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
+    --text-primary: #f8fafc;
+    --text-muted: #94a3b8;
+    --border-color: rgba(255, 255, 255, 0.05);
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    overflow-x: hidden;
+    background-color: var(--brand-bg);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+}
+
+/* Typography Enhancements */
+.gradient-text {
+    background: var(--brand-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Theme-adaptive layouts */
+.theme-bg-transition {
+    background-color: var(--brand-sidebar) !important;
+    border-color: var(--border-color) !important;
+    transition: background-color 0.3s ease;
+}
+
+.card {
+    background: var(--brand-card) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.card-header {
+    background-color: transparent !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* ---------------------------------------------------
+    Fully Responsive Sidebar Layout 
+----------------------------------------------------- */
+#wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+#sidebar-wrapper {
+    min-width: 250px;
+    max-width: 250px;
+    background-color: var(--brand-sidebar);
+    transition: margin 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+    z-index: 1040;
+}
+
+[data-bs-theme="dark"] #sidebar-wrapper {
+    box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+}
+
+#sidebar-wrapper .sidebar-heading {
+    padding: 1.25rem 1.25rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+.list-group-item {
+    background: transparent !important;
+    color: var(--text-muted) !important;
+    font-size: 1.05rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.list-group-item:hover {
+    color: var(--text-primary) !important;
+    background: var(--border-color) !important;
+    transform: translateX(5px);
+}
+
+#page-content-wrapper {
+    flex-grow: 1;
+    min-width: 0;
+    width: 100%;
+}
+
+/* Mobile Default: Sidebar Hidden (Off-canvas) */
+@media (max-width: 767.98px) {
+    #sidebar-wrapper {
+        position: fixed;
+        height: 100%;
+        margin-left: -250px;
+    }
+    
+    body.sb-sidenav-toggled #sidebar-wrapper {
+        margin-left: 0;
+    }
+
+    /* Dim background when mobile menu is open */
+    body.sb-sidenav-toggled::after {
+        content: '';
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        background: rgba(0,0,0,0.5);
+        z-index: 1030;
+    }
+}
+
+/* Desktop Default: Sidebar Visible */
+@media (min-width: 768px) {
+    body.sb-sidenav-toggled #sidebar-wrapper {
+        margin-left: -250px;
+    }
+}
+/* --------------------------------------------------- */
+
+
+/* Interactive Elements */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+}
+
+[data-bs-theme="dark"] .card:hover {
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4) !important;
+}
+
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background: var(--brand-gradient);
+    border: none;
+    color: white !important;
+}
+
+.btn-primary:hover {
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+    transform: scale(1.02);
+}
+
+/* Table Styling */
+.table-responsive {
+    border-radius: 12px;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table {
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+.table-dark {
+    background-color: var(--brand-sidebar) !important;
+    color: var(--text-primary) !important;
+}
+
+.table-hover>tbody>tr:hover>* {
+    background-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-bs-theme="dark"] .table-dark th {
+    background-color: rgba(255,255,255,0.05) !important;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--brand-bg); 
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border-color); 
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted); 
+}

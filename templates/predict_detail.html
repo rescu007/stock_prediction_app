@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+<input type="hidden" id="pageTicker" value="{{ ticker }}">
+
+<div class="d-flex justify-content-between align-items-center mb-4 mt-2">
+    <div>
+        <h1 class="mb-0">{{ ticker }} <span class="fs-4 text-muted" id="sentimentBadge"></span></h1>
+        <p class="text-muted mb-0">Deep Learning (DNN) Analysis Studio</p>
+    </div>
+    <div>
+        {% if current_user.is_authenticated %}
+        <button id="toggleWatchlistBtn" class="btn btn-outline-warning"><i class="fa-solid fa-star"></i> Watchlist processing...</button>
+        {% endif %}
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    </div>
+</div>
+
+<!-- Loader -->
+<div id="loaderUI" class="card shadow py-5 text-center my-5">
+    <div class="card-body">
+        <div class="spinner-border text-primary" style="width: 4rem; height: 4rem;" role="status"></div>
+        <h3 class="mt-4">Training Neural Network...</h3>
+        <p class="text-muted">Fetching historical data, calculating Technical Indicators, parsing Natural Language Sentiment, and training the Scikit-Learn DNN Model on-the-fly. Please wait.</p>
+    </div>
+</div>
+
+<!-- Results Area -->
+<div id="resultsUI" class="d-none">
+    
+    <!-- Top KPI Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card shadow h-100 border-start border-primary border-5">
+                <div class="card-body py-3">
+                    <h6 class="text-muted text-uppercase mb-1">Latest Close</h6>
+                    <h3 class="fw-bold mb-0" id="resClose">0.00</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow h-100 border-start border-success border-5">
+                <div class="card-body py-3">
+                    <h6 class="text-muted text-uppercase mb-1">Model Trade Signal</h6>
+                    <h3 class="fw-bold mb-0" id="resSignal">-</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow h-100 border-start border-warning border-5">
+                <div class="card-body py-3">
+                    <h6 class="text-muted text-uppercase mb-1">News Sentiment</h6>
+                    <h3 class="fw-bold mb-0" id="resSentiment">-</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow h-100 border-start border-secondary border-5">
+                <div class="card-body py-3">
+                    <h6 class="text-muted text-uppercase mb-1">Model RMSE</h6>
+                    <h3 class="fw-bold mb-0" id="resRmse">0.00</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Candlestick + MA Section -->
+    <div class="card shadow mb-4">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0"><i class="fa-solid fa-chart-candlestick me-2"></i> Historical & Technical Constraints</h5>
+        </div>
+        <div class="card-body p-0">
+            <div id="candlestickChart" style="height: 500px; width: 100%;"></div>
+        </div>
+    </div>
+    
+    <!-- Predictive Graph -->
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0"><i class="fa-solid fa-brain me-2"></i> DNN Testing Set Accuracy</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div id="testPredictChart" style="height: 400px; width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0"><i class="fa-solid fa-crystal-ball me-2"></i> Future Forecast (30 Days)</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div id="futurePredictChart" style="height: 400px; width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
