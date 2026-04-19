@@ -7,8 +7,8 @@
     <!-- Watchlist Widget -->
     <div class="col-lg-4 mb-4">
         <div class="card shadow h-100">
-            <div class="card-header bg-primary text-white">
-                <h5 class="mb-0"><i class="fa-solid fa-star me-2"></i> Your Watchlist</h5>
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fa-solid fa-star text-warning me-2"></i> Your Watchlist</h5>
             </div>
             <div class="card-body">
                 {% if current_user.is_authenticated %}
@@ -25,9 +25,9 @@
     <!-- Indian Market Quick View -->
     <div class="col-lg-8 mb-4">
         <div class="card shadow h-100">
-            <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
-                <h5 class="mb-0"><i class="fa-solid fa-arrow-trend-up me-2"></i> Indian Movers (NIFTY/SENSEX)</h5>
-                <a href="{{ url_for('indian_stocks') }}" class="btn btn-sm btn-light">View All</a>
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="fa-solid fa-arrow-trend-up text-success me-2"></i> Indian Movers (NIFTY/SENSEX)</h5>
+                <a href="{{ url_for('indian_stocks') }}" class="btn btn-sm btn-outline-primary">View All</a>
             </div>
             <div class="card-body">
                 <div class="row" id="moversContainer">
@@ -41,8 +41,8 @@
 <div class="row">
     <div class="col-12">
         <div class="card shadow">
-            <div class="card-header bg-dark text-white border-secondary">
-                <h5 class="mb-0"><i class="fa-solid fa-search me-2"></i> Deep Learning Analysis Search</h5>
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fa-solid fa-search text-primary me-2"></i> Deep Learning Analysis Search</h5>
             </div>
             <div class="card-body py-5 text-center">
                 <h3>Enter any ticker to begin DNN Prediction</h3>
