@@ -1,11 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Sidebar Toggle
+    // 1. Sidebar Toggle & Mobile Backdrop
     const sidebarToggle = document.body.querySelector('#sidebarToggle');
+    const closeSidebarBtn = document.getElementById('closeSidebarBtn');
+    const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+
+    function toggleSidebar() {
+        document.body.classList.toggle('sb-sidenav-toggled');
+        if (sidebarBackdrop) {
+            if (document.body.classList.contains('sb-sidenav-toggled') && window.innerWidth < 768) {
+                sidebarBackdrop.classList.remove('d-none');
+            } else {
+                sidebarBackdrop.classList.add('d-none');
+            }
+        }
+    }
+
     if (sidebarToggle) {
         sidebarToggle.addEventListener('click', event => {
             event.preventDefault();
-            document.body.classList.toggle('sb-sidenav-toggled');
+            toggleSidebar();
         });
+    }
+    
+    if (closeSidebarBtn) {
+        closeSidebarBtn.addEventListener('click', toggleSidebar);
+    }
+    
+    if (sidebarBackdrop) {
+        sidebarBackdrop.addEventListener('click', toggleSidebar);
     }
 
     // 2. Theme Toggle
@@ -36,12 +58,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         let color = stock.change_pct >= 0 ? 'text-success' : 'text-danger';
                         let icon = stock.change_pct >= 0 ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down';
                         let row = `
-                            <tr>
-                                <td class="fw-bold">${stock.symbol}</td>
+                            <tr class="clickable-row position-relative" onclick="window.location.href='/predict_detail?ticker=${stock.symbol}'" style="cursor: pointer;">
+                                <td class="fw-bold text-primary">${stock.symbol}</td>
                                 <td>${stock.name}</td>
                                 <td>₹${stock.price}</td>
                                 <td class="${color}"><i class="fa-solid ${icon}"></i> ${stock.change_pct}%</td>
-                                <td><a href="/predict_detail?ticker=${stock.symbol}" class="btn btn-sm btn-outline-primary">Analyze</a></td>
                             </tr>
                         `;
                         indianStocksBody.innerHTML += row;
@@ -85,12 +106,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         let color = stock.change_pct >= 0 ? 'text-success' : 'text-danger';
                         let icon = stock.change_pct >= 0 ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down';
                         let row = `
-                            <tr>
-                                <td class="fw-bold">${stock.symbol}</td>
+                            <tr class="clickable-row position-relative" onclick="window.location.href='/predict_detail?ticker=${stock.symbol}'" style="cursor: pointer;">
+                                <td class="fw-bold text-primary">${stock.symbol}</td>
                                 <td>${stock.name}</td>
                                 <td>$${stock.price}</td>
                                 <td class="${color}"><i class="fa-solid ${icon}"></i> ${stock.change_pct}%</td>
-                                <td><a href="/predict_detail?ticker=${stock.symbol}" class="btn btn-sm btn-outline-primary">Analyze</a></td>
                             </tr>
                         `;
                         foreignStocksBody.innerHTML += row;
@@ -133,10 +153,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 data.top_gainers.forEach(gainer => {
                     moversContainer.innerHTML += `
                         <div class="col-md-4 mb-2">
-                            <div class="p-3 border rounded border-success bg-opacity-10 bg-success">
-                                <h6 class="mb-1">${gainer.symbol}</h6>
-                                <h4 class="mb-0 text-success">+${gainer.change_pct}%</h4>
-                            </div>
+                            <a href="/predict_detail?ticker=${gainer.symbol}" class="text-decoration-none hover-scale d-block">
+                                <div class="p-3 border rounded border-success bg-opacity-10 bg-success shadow-sm">
+                                    <h6 class="mb-1 text-primary fw-bold">${gainer.symbol} <i class="fa-solid fa-arrow-pointer ms-1 small text-muted"></i></h6>
+                                    <h4 class="mb-0 text-success">+${gainer.change_pct}%</h4>
+                                </div>
+                            </a>
                         </div>
                     `;
                 });

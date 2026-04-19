@@ -26,8 +26,11 @@
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
         <div class="border-end theme-bg-transition" id="sidebar-wrapper">
-            <div class="sidebar-heading border-bottom p-3">
+            <div class="sidebar-heading border-bottom p-3 position-relative">
                 <i class="fa-solid fa-chart-line text-primary me-2"></i><strong>PredictX</strong>
+                <button id="closeSidebarBtn" class="btn btn-link link-secondary d-md-none position-absolute top-0 end-0 mt-3 me-2 p-0 text-decoration-none">
+                    <i class="fa-solid fa-xmark fa-lg"></i>
+                </button>
             </div>
             <div class="list-group list-group-flush mt-3">
                 <a href="{{ url_for('dashboard') }}" class="list-group-item list-group-item-action p-3 border-0">
@@ -56,6 +59,9 @@
                 {% endif %}
             </div>
         </div>
+        
+        <!-- Mobile Sidebar Backdrop overlay -->
+        <div id="sidebarBackdrop" class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-none" style="z-index: 1030;"></div>
         
         <!-- Page Content -->
         <div id="page-content-wrapper" class="w-100">

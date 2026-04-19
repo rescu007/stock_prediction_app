@@ -3,12 +3,12 @@
 {% block content %}
 <input type="hidden" id="pageTicker" value="{{ ticker }}">
 
-<div class="d-flex justify-content-between align-items-center mb-4 mt-2">
-    <div>
-        <h1 class="mb-0">{{ ticker }} <span class="fs-4 text-muted" id="sentimentBadge"></span></h1>
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 mt-2">
+    <div class="mb-3 mb-md-0">
+        <h1 class="mb-0 gradient-text">{{ ticker }} <span class="fs-4 text-muted" id="sentimentBadge"></span></h1>
         <p class="text-muted mb-0">Deep Learning (DNN) Analysis Studio</p>
     </div>
-    <div>
+    <div class="d-flex flex-column flex-sm-row gap-2">
         {% if current_user.is_authenticated %}
         <button id="toggleWatchlistBtn" class="btn btn-outline-warning"><i class="fa-solid fa-star"></i> Watchlist processing...</button>
         {% endif %}
@@ -66,11 +66,11 @@
 
     <!-- Candlestick + MA Section -->
     <div class="card shadow mb-4">
-        <div class="card-header bg-dark text-white">
-            <h5 class="mb-0"><i class="fa-solid fa-chart-candlestick me-2"></i> Historical & Technical Constraints</h5>
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fa-solid fa-chart-candlestick text-primary me-2"></i> Historical & Technical Constraints</h5>
         </div>
-        <div class="card-body p-0">
-            <div id="candlestickChart" style="height: 500px; width: 100%;"></div>
+        <div class="card-body p-0 overflow-hidden" style="min-height: 500px;">
+            <div id="candlestickChart" style="height: 100%; width: 100%;"></div>
         </div>
     </div>
     
@@ -78,21 +78,21 @@
     <div class="row">
         <div class="col-lg-6 mb-4">
             <div class="card shadow h-100">
-                <div class="card-header bg-dark text-white">
-                    <h5 class="mb-0"><i class="fa-solid fa-brain me-2"></i> DNN Testing Set Accuracy</h5>
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fa-solid fa-brain text-success me-2"></i> DNN Testing Set Accuracy</h5>
                 </div>
-                <div class="card-body p-0">
-                    <div id="testPredictChart" style="height: 400px; width: 100%;"></div>
+                <div class="card-body p-0 overflow-hidden" style="min-height: 400px;">
+                    <div id="testPredictChart" style="height: 100%; width: 100%;"></div>
                 </div>
             </div>
         </div>
         <div class="col-lg-6 mb-4">
             <div class="card shadow h-100">
-                <div class="card-header bg-dark text-white">
-                    <h5 class="mb-0"><i class="fa-solid fa-crystal-ball me-2"></i> Future Forecast (30 Days)</h5>
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fa-solid fa-crystal-ball text-warning me-2"></i> Future Forecast (30 Days)</h5>
                 </div>
-                <div class="card-body p-0">
-                    <div id="futurePredictChart" style="height: 400px; width: 100%;"></div>
+                <div class="card-body p-0 overflow-hidden" style="min-height: 400px;">
+                    <div id="futurePredictChart" style="height: 100%; width: 100%;"></div>
                 </div>
             </div>
         </div>
